@@ -1,0 +1,28 @@
+package strings;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+public class regExDemo {
+
+
+    static void containsA(String s) {
+
+      String myRegEx = "[a-zA-Z\\s]+";
+
+      Pattern p = Pattern.compile(myRegEx);
+
+      Matcher m = p.matcher(s);
+
+      if(m.find()) {
+          System.out.println(m.group());
+      }
+    }
+
+    public static void main(String[] args) {
+
+        String s  = "A quick brown fox jumped over the lazy dog...";
+
+        containsA(s);
+    }
+}
