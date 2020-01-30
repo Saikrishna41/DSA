@@ -1,76 +1,97 @@
-package linkedList;
+import linkedLists.LinkedList;
 
+class LinkedListNode {
 
-public class LList {
+    LinkedListNode next;
+    int data;
 
+    public LinkedListNode(int x) {
 
-    class Nodess {
-
-        Nodess next;
-        int data;
-
-        public Nodess(int x) {
-
-            this.data = x;
-        }
+        this.data = x;
+        this.next = null;
     }
-    Nodess head;
+
+}
+
+public class linkedLists1 {
+
+    LinkedListNode head;
+
 
     public void append(int x) {
-
-        Nodess newNode = new Nodess(x);
-
-        if(head == null) {
-
+        LinkedListNode newNode = new LinkedListNode(x);
+        if (head == null) {
             head = newNode;
             return;
         }
-        Nodess current = head;
+
+        LinkedListNode current = head;
         while (current.next != null) {
             current = current.next;
-
         }
         current.next = newNode;
+
     }
 
     public void prepend(int x) {
-
-        Nodess newNode = new Nodess(x);
-        if(head == null) {
+        LinkedListNode newNode = new LinkedListNode(x);
+        if (head == null) {
             head = newNode;
             return;
         }
-        else {
-            newNode.next = head;
-            head = newNode;
+        newNode.next = head;
+        head = newNode;
+    }
+
+    public void insertAfter(LinkedListNode prev, int x) {
+        LinkedListNode newNode = new LinkedListNode(x);
+        newNode.next = prev.next;
+        prev.next = newNode;
+
+
+    }
+
+    public void printAll() {
+
+        LinkedListNode current = head;
+        while (current != null) {
+
+            System.out.print(current.data + "=> ");
+
+
+            current = current.next;
+        }
+    }
+
+    public void removeAt(int pos) {
+
+        LinkedListNode temp = head, prev = null;
+        if (head == null) {
             return;
         }
-    }
-
-    public void insertAfter(Nodess prev, int x) {
-
-        Nodess newNode = new Nodess(x);
-        if(prev == null) {
-            System.out.println("previous node cannot be null");
-        }
-        else {
-
-            newNode.next = prev.next;
-            prev.next = newNode;
-        }
-    }
-
-    public void removeVal(int key) {
-
-        Nodess temp = head, prev = null;
-        if(temp != null && temp.data == key) {
+        if (pos == 0) {
             head = temp.next;
         }
+        for (int i = 0; i < pos - 1 && temp != null; i++) {
+            temp = temp.next;
+        }
+        LinkedListNode next = temp.next.next;
+        temp.next = next;
 
+    }
+
+    public void removeNode(int key) {
+        LinkedListNode temp = head, prev = null;
+        if (temp != null && temp.data == key) {
+            head = temp.next;
+        }
         while (temp != null && temp.data != key) {
 
             prev = temp;
+
             temp = temp.next;
+
+
         }
         if (temp == null) {
             return;
@@ -78,87 +99,70 @@ public class LList {
         prev.next = temp.next;
     }
 
-    public void removeValAtPos(int pos) {
-        Nodess temp = head;
-        if(pos == 0) {
-            head = temp.next;
+    public int getNthNode(int index) {
+
+        LinkedListNode current = head;
+
+        int count = 0;
+
+        while (current != null) {
+
+            if (count == index) {
+                return current.data;
+            }
+            count++;
+            current = current.next;
         }
-        for(int i = 0; i < pos - 1 && temp != null ; i++) {
-            temp = temp.next;
+
+        assert (false);
+        return 0;
+    }
+
+    public void getNthNodeFromLast(int index) {
+
+        LinkedListNode current = head;
+        int len = 0;
+        while (current != null) {
+            current = current.next;
+            len++;
         }
-        if(temp == null) {
+        if (len < index) {
             return;
         }
-        Nodess next = temp.next.next;
-        temp.next = next;
-    }
-
-    public void printList() {
-
-        Nodess currnt = head;
-        while (currnt != null) {
-            if(currnt.next != null) {
-                System.out.print(currnt.data+"->");
-
-            }
-            else {
-
-                System.out.print(currnt.data);
-            }
-            currnt = currnt.next;
-
+        current = head;
+        for (int i = 1; i < len - index + 1; i++) {
+            current = current.next;
         }
+        System.out.println(current.data);
 
     }
-
-    public void getNthElementfromlast(int n) {
-
-       int len = 0;
-
-       Nodess temp = head;
-
-       while (temp != null) {
-
-           temp = temp.next;
-           len++;
-       }
-       if(len < n) {
-           return;
-       }
-       temp = head;
-
-       for(int i = 1; i < len - n + 1; i++) {
-
-           temp = temp.next;
-
-       }
-        System.out.println(temp.data);
-    }
-
-
 
     public static void main(String[] args) {
 
-        LList l = new LList();
-        l.append(1);
-        l.append(2);
-        l.append(3);
-        l.append(4);
-        l.append(5);
-        l.printList();
-        System.out.println();
-        l.insertAfter(l.head.next.next.next,22);
-        l.printList();
-        System.out.println();
-        l.removeVal(22);
-        l.printList();
-        System.out.println();
-        l.removeValAtPos(4);
-        System.out.println();
-        l.printList();
-        System.out.println();
-        l.getNthElementfromlast(2);
+        linkedLists1 node = new linkedLists1();
 
+        node.append(1);
+        node.append(2);
+        node.append(3);
+        node.append(4);
+        node.printAll();
+
+        node.insertAfter(node.head.next.next, 32);
+        System.out.println();
+        System.out.println("adding node 32");
+
+        node.printAll();
+        System.out.println();
+        System.out.println("removing node 32");
+        node.removeNode(32);
+        node.printAll();
+        System.out.println();
+        System.out.println("find node");
+        System.out.println(node.getNthNode(2));
+        System.out.println();
+        System.out.println("get nth node from last");
+        node.getNthNodeFromLast(2);
 
     }
+
 }
