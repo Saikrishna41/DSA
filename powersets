@@ -1,0 +1,36 @@
+public class powersets {
+
+
+
+    static void powerSet(String[] a) {
+
+        int combinations = (int)Math.pow(2,a.length);
+
+        int counter = 0;
+
+        for(int i = 0; i < combinations; i++) {
+
+            for(int j = 0; j < a.length; j++) {
+
+                if((i & (1<<j))> 0) {
+
+                    System.out.print(a[j]);
+                }
+
+            }
+            System.out.println();
+        }
+
+
+
+    }
+    public static void main(String[] args) {
+
+        String[] a = {"a","b","c"};
+
+        powerSet(a);
+
+
+
+    }
+}
