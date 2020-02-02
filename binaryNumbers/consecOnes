@@ -1,0 +1,24 @@
+public class binnumbersconsecones {
+
+
+    public static void main(String[] args) {
+
+        int n = 19;
+
+        String s = Integer.toBinaryString(n);
+
+        System.out.println(s);
+
+        String[] a = s.split("0");
+        int count = 0;
+        for (String c : a) {
+            System.out.println(c);
+            if (count < c.length()) {
+                count = c.length();
+            }
+        }
+
+        System.out.println(count);
+
+    }
+}
