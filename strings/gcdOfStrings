@@ -1,0 +1,39 @@
+public class gdc {
+
+
+    static String gcdofString(String s1, String s2) {
+
+        if (s1 == null || s2 == null) {
+            return null;
+        }
+        if (s1.length() == 0 || s2.length() == 0) {
+            return "";
+        }
+
+        if (s1.length() > s2.length()) {
+
+            gcdofString(s2, s1);
+        }
+
+        if (s1.length() == s2.length() && s1.equals(s2)) {
+            System.out.println(s1);
+        }
+
+        if (s2.contains(s1) || s2.startsWith(s1)) {
+            return gcdofString(s2.substring(s1.length()), s1);
+        }
+        else {
+            return "";
+        }
+    }
+
+    public static void main(String[] args) {
+
+        String s1 = "ABABABAB";
+
+        String s2 = "AB";
+
+        gcdofString(s1,s2);
+
+    }
+}
