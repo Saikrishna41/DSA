@@ -1,0 +1,65 @@
+package dsa;
+
+import java.util.EmptyStackException;
+import java.util.Stack;
+
+//implement stack using linked list
+public class Stacks<T> {
+
+    class StackNodes {
+        private T data;
+        private StackNodes next;
+
+        public StackNodes(T x) {
+
+            this.data = x;
+        }
+    }
+
+    private StackNodes top;
+
+    public void push(T x) {
+        StackNodes newNode = new StackNodes(x);
+        newNode.next = top;
+        top = newNode;
+
+
+    }
+
+    public T pop() {
+        if (isEmpty()) throw new EmptyStackException();
+
+        T item = top.data;
+        top = top.next;
+        return item;
+
+    }
+
+    public T peek() {
+        if (isEmpty()) throw new EmptyStackException();
+
+        T item = top.data;
+        return item;
+    }
+
+    public boolean isEmpty() {
+        return top == null;
+    }
+
+    public static void main(String[] args) {
+
+
+        Stacks s = new Stacks();
+
+        s.push('a');
+        s.push('b');
+        s.push('c');
+        s.push('d');
+        System.out.println(s.peek());
+//        while (!s.isEmpty()) {
+//            System.out.println(s.pop());
+//        }
+    }
+
+
+}
