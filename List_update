@@ -1,0 +1,157 @@
+package dsa;
+
+
+public class LinkedList {
+
+    static class Nodes {
+
+        private Nodes next;
+
+        private int val;
+
+        public Nodes(int x) {
+
+            this.val = x;
+
+            this.next = null;
+        }
+    }
+
+    Nodes head;
+
+    public void append(int x) {
+
+        Nodes newNode = new Nodes(x);
+
+        if (head == null) {
+            head = newNode;
+            return;
+        }
+        Nodes current = head;
+
+        while (current.next != null) {
+
+            current = current.next;
+        }
+        current.next = newNode;
+    }
+
+    public void prepend(int x) {
+
+        Nodes newNode = new Nodes(x);
+
+        if (head == null) {
+            head = newNode;
+            return;
+        }
+
+        newNode.next = head;
+        head = newNode;
+
+    }
+
+    public void insertAfter(Nodes prev, int x) {
+
+        Nodes newNode = new Nodes(x);
+
+        newNode.next = prev.next;
+
+        prev.next = newNode;
+    }
+
+    public void insertAtPos(int pos, int x) {
+
+        Nodes newNode = new Nodes(x);
+
+        if (pos == 0) {
+            head = newNode;
+            return;
+        }
+        Nodes current = head;
+        for (int i = 1; i < pos; i++) {
+
+            current = current.next;
+        }
+        newNode.next = current.next.next;
+        current.next = newNode;
+
+    }
+
+    public void removeNode(int key) {
+
+        Nodes temp = head;
+        Nodes prev = null;
+        if (temp != null && temp.val == key) {
+
+            head = temp.next;
+            return;
+        }
+
+        while (temp != null && temp.val != key) {
+
+            prev = temp;
+
+            temp = temp.next;
+        }
+        if (temp == null) return;
+
+
+        prev.next = temp.next;
+
+    }
+
+    public void removeAt(int pos) {
+        Nodes temp = head;
+
+        if(head == null) return;
+        if (pos == 0) {
+
+            head = temp.next;
+            return;
+        }
+
+        for(int i = 0; temp != null && i < pos-1; i++) {
+           temp = temp.next;
+        }
+        if(temp == null || temp.next == null) return;
+
+        Nodes next = temp.next.next;
+
+        temp.next = next;
+
+
+    }
+
+    public void printList(Nodes head) {
+        Nodes current = head;
+        while (current != null) {
+            System.out.print(current.val + " ");
+            current = current.next;
+        }
+    }
+
+    public static void main(String[] args) {
+
+        LinkedList list = new LinkedList();
+
+
+
+        list.append(1);
+        list.append(2);
+        list.append(3);
+        list.append(4);
+        list.append(5);
+        System.out.println();
+        list.printList(list.head);
+
+        System.out.println();
+
+        list.removeAt(2);
+
+        System.out.println();
+
+        list.printList(list.head);
+
+
+    }
+}
