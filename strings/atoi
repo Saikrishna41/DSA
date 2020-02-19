@@ -1,0 +1,42 @@
+package arraysandstrings.roug_work;
+
+import java.util.Scanner;
+
+public class atoics2 {
+
+    static int Solution(String s) {
+
+        int sign = 1, n = s.length(), i = 0;
+
+        while (i < n && s.charAt(i) == ' ')
+            ++i;
+
+        if (i >= n) {
+            return 0;
+        }
+        long res = 0;
+        if (s.charAt(i) == '+' || s.charAt(i) == '-') {
+            sign = s.charAt(i++) == '+' ? 1 : -1;
+        }
+        while (i < n && Character.isDigit(s.charAt(i))) {
+
+            res = res * 10 + (s.charAt(i++) - '0');
+            if (res * sign > Integer.MAX_VALUE || res * sign < Integer.MIN_VALUE) {
+                return sign == 1 ? Integer.MAX_VALUE : Integer.MIN_VALUE;
+            }
+        }
+
+
+        return sign * (int) res;
+    }
+
+    public static void main(String[] args) {
+
+
+        Scanner in = new Scanner(System.in);
+        String a = in.next();
+        int res = Solution(a);
+
+        System.out.println(res);
+    }
+}
